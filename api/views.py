@@ -6,6 +6,7 @@ from .models import Item
 from .serializers import ItemSerializer
 from django.shortcuts import render, redirect
 from .forms import ItemForm
+from django.http import JsonResponse
 
 
 # API to get the list of items
@@ -45,3 +46,6 @@ def create_item_view(request):
         form = ItemForm()
 
     return render(request, 'create_item.html', {'form': form})
+
+def root_view(request):
+    return JsonResponse({"message": "Welcome to the Django API root!", "admin": "/admin/", "itemList": "/api/items/", "itemDetails": "/api/items/1", "itemForm": "/api/items/form/", "createItem": "/api/items/create/"})
